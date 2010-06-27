@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'sinatra'
+require 'haml'
 
 configure :production do
   APP_ID = ENV['app_id']
@@ -20,6 +21,6 @@ error do
   'err ' + ENV['sinatra.error'].name
 end
 
-get '/canvas' do
+get '/canvas/' do
   haml :index
 end
