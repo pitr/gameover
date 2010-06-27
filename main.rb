@@ -2,6 +2,11 @@ require 'rubygems'
 require 'sinatra'
 require 'haml'
 
+configure do
+  APP_ID = 'app_id'
+  APP_SECRET = 'app_secret'
+end
+
 configure :production do
   APP_ID = ENV['app_id']
   APP_SECRET = ENV['app_secret']
@@ -22,6 +27,6 @@ error do
 end
 
 get '/canvas/' do
-  cookie = get_cookie
+  @cookie = get_cookie
   haml :index
 end
