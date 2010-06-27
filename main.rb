@@ -20,7 +20,6 @@ error do
   'err ' + ENV['sinatra.error'].name
 end
 
-get '/' do
-  get_cookie
-  #haml :index
+get '/canvas' do
+  haml :index
 end
