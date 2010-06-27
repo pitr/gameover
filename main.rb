@@ -22,5 +22,6 @@ error do
 end
 
 get '/canvas/' do
+  cookie = get_cookie
   haml :index
 end

@@ -1,3 +1,16 @@
-%p hi
-- request.cookies.each do |c|
-  %p= c
+!!! 5
+%html
+  %head
+  %body
+    - if cookie
+      = "hi, {cookie}"
+    - else
+      %fb:login-button Install Game Over
+    .fb-root
+    %script{:type => "text/javascript", :src  => "http://connect.facebook.net/en_US/all.js"}
+    :javascript
+      FB.init({appId: '{APP_ID}', xfbml: true});
+      FB.Event.subscribe('auth.login', function(response) {
+        // Reload the application in the logged-in state
+        window.top.location = 'http://apps.facebook.com/game_over/';
+      });
