@@ -5,6 +5,10 @@
     - if fb.valid?
       %p Welcome
       %fb:name{:uid => fb[:user], :useyou => 'false'}
+      #location
+      :javascript
+        var query = FB.Data.query('select current_location from standard_user_info where uid={0}', #{fb[:user]});
+        query.wait(function(rows) { document.getElementById('location').innerHTML = rows[0].current_location; });
     - else
       %fb:login-button{:perms => 'user_location'} Click me!
     #fb-root
