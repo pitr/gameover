@@ -2,6 +2,8 @@
 %html
   %head
   %body
+    %p Welcome
+    %fb:name{:uid => fb[:user], :useyou => 'false'}
     - if @location
       %p= "You are from #{@location}"
     - else

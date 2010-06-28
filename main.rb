@@ -56,19 +56,15 @@ end
 
 get '/canvas/' do
   fb.require_login!
-  haml :index
-end
-
-get '/auth' do
   redirect client.web_server.authorize_url(:redirect_uri => redirect_uri)
 end
 
 get '/auth/callback' do
   access_token = client.web_server.get_access_token(params[:code], :redirect_uri => redirect_uri)
   user = JSON.parse(access_token.get('/me', :fields => 'location'))
-  if user[:location]
-    @location = user[:location][:name]
-    @locationID = user[:location][:id]
+  if user['location']
+    @location = user['location']['name']
+    @locationID = user['location']['id']
   end
   haml :location
 end
