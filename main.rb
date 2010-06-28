@@ -25,7 +25,7 @@ facebook do
   api_key APP_KEY
   secret APP_SECRET
   app_id APP_ID
-  url 'http://apps.facebook.com/gameover'
+  url 'http://apps.facebook.com/game_over'
   callback DOMAIN
 end
 
