@@ -3,7 +3,7 @@
   %head
   %body
     %fb:name{:uid => fb[:user], :useyou => 'false'}
-    %p= fb.users.getInfo(:uid => fb[:user], :fields => [:current_location])[0][:current_location]
+    %p= @current_loc
     %script{:type => "text/javascript", :src  => "http://connect.facebook.net/en_US/all.js"}
     :javascript
       FB.init({appId: '#{APP_ID}', xfbml: true});

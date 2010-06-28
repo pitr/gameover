@@ -41,5 +41,8 @@ end
 
 get '/canvas/' do
   fb.require_login!
+  info = fb.users.getInfo(:uid => fb[:user], :fields => [:current_location])
+  @current_loc = ''
+  @current_loc = info.first['current_location'] if info
   haml :index
 end
