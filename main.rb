@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'haml'
+require 'md5'
 
 configure :test, :development do
   APP_ID = 'app_id'
