@@ -2,13 +2,15 @@
 %html
   %head
   %body
-    %p Welcome
-    %fb:name{:uid => fb[:user], :useyou => 'false'}
-    %a{:href => '/auth'} Keep going
+    - if fb.valid?
+      %p Welcome
+      %fb:name{:uid => fb[:user], :useyou => 'false'}
+    - else
+      %fb:login-button{:perms => 'location'} Click me!
+    .fb-root
     %script{:type => "text/javascript", :src  => "http://connect.facebook.net/en_US/all.js"}
     :javascript
-      FB.init({appId: '#{APP_ID}', xfbml: true});
+      FB.init({appId: '#{APP_ID}', status: true, cookie: true, xfbml: true});
       FB.Event.subscribe('auth.login', function(response) {
-        // Reload the application in the logged-in state
-        window.top.location = 'http://apps.facebook.com/game_over/';
+        window.location.reload();
       });

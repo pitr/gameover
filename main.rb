@@ -51,7 +51,7 @@ error do
 end
 
 get '/' do
-  'hi'
+  haml :index
 end
 
 get '/canvas/' do
