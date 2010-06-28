@@ -26,7 +26,7 @@ facebook do
   secret APP_SECRET
   app_id APP_ID
   url 'http://apps.facebook.com/game_over'
-  callback DOMAIN
+  callback "#{DOMAIN}canvas/"
 end
 
 helpers do
