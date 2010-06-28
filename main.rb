@@ -36,7 +36,7 @@ helpers do
 
   def redirect_uri
     uri = URI.parse(request.url)
-    uri.path = '/auth/facebook/callback'
+    uri.path = '/canvas/callback'
     uri.query = nil
     uri.to_s
   end
@@ -58,7 +58,7 @@ get '/canvas/' do
   fb.require_login!
   redirect client.web_server.authorize_url(
     :redirect_uri => redirect_uri, 
-    :scope => 'location'
+    :fields => 'location'
   )
 end
 
