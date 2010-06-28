@@ -35,6 +35,10 @@ error do
   'err ' + ENV['sinatra.error'].name
 end
 
+get '/' do
+  'hi'
+end
+
 get '/canvas/' do
   fb.require_login!
   haml :index
