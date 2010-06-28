@@ -2,8 +2,9 @@
 %html
   %head
   %body
+    %p Welcome
     %fb:name{:uid => fb[:user], :useyou => 'false'}
-    %p= @current_loc
+    %a{:href => '/auth'} Keep going
     %script{:type => "text/javascript", :src  => "http://connect.facebook.net/en_US/all.js"}
     :javascript
       FB.init({appId: '#{APP_ID}', xfbml: true});
