@@ -57,6 +57,7 @@ end
 get '/canvas/' do
   fb.require_login!
   haml :index
+end
 
 get '/auth' do
   redirect client.web_server.authorize_url(:redirect_uri => redirect_uri)
