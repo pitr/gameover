@@ -52,7 +52,7 @@ end
 
 before do
   sig, params = fb_sig_and_params
-  @cookie = convert_paramteres!(params) if signature_is_valid?(params, sig)
+  @cookie = convert_parameters!(params) if signature_is_valid?(params, sig)
 end
 
 not_found do
