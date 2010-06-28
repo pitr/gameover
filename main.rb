@@ -2,6 +2,8 @@ require 'rubygems'
 require 'sinatra'
 require 'haml'
 require 'sinbook'
+require 'oauth2'
+require 'json'
 
 configure :test, :development do
   APP_ID = 'app_id'
@@ -27,6 +29,19 @@ facebook do
   callback DOMAIN
 end
 
+helpers do
+  def client
+    OAuth2::Client.new(APP_ID, APP_SECRET, :site => 'https://graph.facebook.com')
+  end
+
+  def redirect_uri
+    uri = URI.parse(request.url)
+    uri.path = '/auth/facebook/callback'
+    uri.query = nil
+    uri.to_s
+  end
+end
+
 not_found do
   'oops'
 end
@@ -41,8 +56,15 @@ end
 
 get '/canvas/' do
   fb.require_login!
-  info = fb.users.getInfo(:uid => fb[:user], :fields => [:current_location])
-  @current_loc = info.inspect
-  #@current_loc = info['current_location'] if info
-  haml :index
+  redirect client.web_server.authorize_url(
+    :redirect_uri => redirect_uri, 
+    :scope => 'location'
+  )
+end
+
+get '/canvas/callback' do
+  access_token = client.web_server.get_access_token(params[:code], :redirect_uri => redirect_uri)
+  user = JSON.parse(access_token.get('/me'))
+
+  user.inspect
 end
