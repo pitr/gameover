@@ -1,0 +1,15 @@
+!!! 5
+%html
+  %head
+  %body
+    - if @location
+      %p= "You are from #{@location}"
+    - else
+      %p We don't know where you are, sorry!
+    %fb:bookmark
+    %script{:type => "text/javascript", :src  => "http://connect.facebook.net/en_US/all.js"}
+    :javascript
+      FB.init({appId: '#{APP_ID}', xfbml: true});
+      FB.Event.subscribe('auth.login', function(response) {
+        window.top.location = 'http://apps.facebook.com/game_over/';
+      });

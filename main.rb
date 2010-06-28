@@ -66,6 +66,9 @@ end
 get '/auth/callback' do
   access_token = client.web_server.get_access_token(params[:code], :redirect_uri => redirect_uri)
   user = JSON.parse(access_token.get('/me', :fields => 'location'))
-
-  user.inspect
+  if user[:location]
+    @location = user[:location][:name]
+    @locationID = user[:location][:id]
+  end
+  haml :location
 end
