@@ -3,7 +3,7 @@
   %head
   %body
     - if @cookie
-      = "hi, #{@cookie}"
+      = "hi, #{@cookie['uid']}"
     - else
       %fb:login-button Install Game Over
     .fb-root
