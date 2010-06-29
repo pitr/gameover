@@ -1,20 +1,5 @@
-!!! 5
-%html
-  %head
-    %script{:type => "text/javascript", :src  => "http://connect.facebook.net/en_US/all.js"}
-  %body
-    - if fb.valid?
-      %p Welcome
-      %fb:name{:uid => fb[:user], :useyou => 'false'}
-      #location
-      :javascript
-        var query = FB.Data.query('select current_location from standard_user_info where uid={0}', #{fb[:user]});
-        query.wait(function(rows) { document.getElementById('location').innerHTML = rows[0].current_location; });
-    - else
-      %fb:login-button{:perms => 'user_location'} Click me!
-    #fb-root
-    :javascript
-      FB.init({appId: '#{APP_ID}', status: true, cookie: true, xfbml: true});
-      FB.Event.subscribe('auth.login', function(response) {
-        window.location.reload();
-      });
+%h1 Welcome
+.mygames
+  - @games.each do |game|
+    = game
+%p You are in #{session['location']}
