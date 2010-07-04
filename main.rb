@@ -13,6 +13,10 @@ require 'model/user'
 configure do
   enable :sessions
   enable :logging
+end
+
+configure :production do
+  enable :raise_errors
 
   require 'uri'
   if ENV['MONGOHQ_URL']
