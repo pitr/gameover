@@ -7,6 +7,7 @@ rescue LoadError
 end
 
 require 'sinatra'
+require 'lilypad'
 require 'haml'
 require 'model/user'
 
@@ -16,6 +17,11 @@ configure do
 end
 
 configure :production do
+  use Rack::Lilypad do
+    api_key ENV['HOPTOAD_API']
+    sinatra
+  end
+
   enable :raise_errors
 
   require 'uri'
@@ -42,4 +48,8 @@ end
 
 get '/' do
   haml :index
+end
+
+get '/error' do
+  haml :blah
 end
