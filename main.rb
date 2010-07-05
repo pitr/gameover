@@ -12,18 +12,10 @@ require 'haml'
 require 'model/user'
 
 configure do
-  enable :sessions
   enable :logging
 end
 
 configure :production do
-  use Rack::Lilypad do
-    api_key ENV['HOPTOAD_API']
-    sinatra
-  end
-
-  enable :raise_errors
-
   require 'uri'
   if ENV['MONGOHQ_URL']
     mongo_uri = URI.parse(ENV['MONGOHQ_URL'])
@@ -42,14 +34,6 @@ not_found do
   'oops'
 end
 
-error do
-  'err ' + ENV['sinatra.error'].name
-end
-
 get '/' do
   haml :index
-end
-
-get '/error' do
-  haml :blah
 end
