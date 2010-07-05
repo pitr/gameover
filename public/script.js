@@ -1,3 +1,6 @@
+var map;
+var newyork = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
+
 function success(position) {
   var s = document.querySelector('#status');
 
@@ -9,38 +12,36 @@ function success(position) {
   s.innerHTML = "found you!";
   s.className = 'success';
 
-  var mapcanvas = document.createElement('div');
-  mapcanvas.id = 'mapcanvas';
-  mapcanvas.style.height = '400px';
-  mapcanvas.style.width = '560px';
-
-  document.querySelector('article').appendChild(mapcanvas);
-
   var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  map.setCenter(latlng);
+  map.setZoom(15);
+}
+
+function error() {
+  var s = document.querySelector('#status');
+
+  if (s.className == 'fail') {
+    return;
+  }
+
+  s.innerHTML = 'Please find yourself!';
+  s.className = 'fail';
+
+  map.setCenter(newyork);
+}
+
+$(document).ready(function(){
   var myOptions = {
-    zoom: 15,
-    center: latlng,
+    zoom: 6,
     mapTypeControl: false,
     navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
-  var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+  map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
 
-  var marker = new google.maps.Marker({
-      position: latlng,
-      map: map,
-      title:"You are here!"
-  });
-}
-
-function error(msg) {
-  var s = document.querySelector('#status');
-  s.innerHTML = typeof msg == 'string' ? msg : "failed";
-  s.className = 'fail';
-}
-
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(success, error);
-} else {
-  error('not supported');
-}
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success, error);
+  } else {
+    error();
+  }
+});

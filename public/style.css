@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  paddin: 0;
+  font-family: Segoe, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+#map {
+  position: relative;
+}
+
+#mapcanvas {
+  height: 400px;
+  width: 100%;
+}
+
+#marker {
+  background: url('/red-dot.png');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  display: block;
+  height: 32px;
+  width: 32px;
+  left: 50%;
+  margin-left: -16px;
+  margin-top: -32px;
+  position: absolute;
+  top: 200px;
+}
