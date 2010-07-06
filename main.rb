@@ -7,7 +7,6 @@ rescue LoadError
 end
 
 require 'sinatra'
-require 'lilypad'
 require 'haml'
 require 'model/user'
 
